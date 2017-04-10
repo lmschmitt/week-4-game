@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Star Wars RPG</title>
+	<!-- Reset -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Pull my style sheet -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<!-- jQuery CDN -->
+	<script src="https://code.jquery.com/jquery.js"></script>
+
+</head>
+<body>
+<div class="jumbotron"> 
+	<h2 class="text-center">Star Wars Game</h2>
+</div>
+
+<div class="row yourCharacter" >
+	<h1>Pick a Character:<h1>
+	<div class="col-md-3" id ="attacker"></div>
+	<div class="col-md-3" id ="enemies"></div>
+	<div class="col-md-3" id ="defender"></div>
+	<div class="col-md-3" id ="defender"></div>
+
+	
+</div>
+
+
+<div class="col-md-12 enemies">
+</div>
+
+<button class ="col-md-12" id="attack">Attack</button>
+
+<div class="col-md-12 defender">
+</div>	
+
+<div class="col-md-12 score">
+
+<script type="text/javascript">
+
+$(function() {
+
+var character;
+var opponent;	
+	
+var characters = [
+	r2d2 = {
+		name: "r2d2",
+		image: "<img src = 'assets/images/r2d2.jpg' id = 'r2d2'>",
+		defendImage: "<img src = 'assets/images/r2d2.jpg'>",
+		baseAttack: 5,
+		attack: 5,
+		health: 50,
+	},
+
+	c3po = {
+		name: "c3po",
+		image: "<img src = 'assets/images/c3po.jpg' id = 'c3po'>",
+		defendImage: "<img src = 'assets/images/c3po.jpg'>",			
+		baseAttack: 6,	
+		attack: 6,
+		health: 80,
+	},
+
+	storm = {
+		name: "storm",
+		image: "<img src = 'assets/images/storm.jpg' id = 'storm'>",
+		defendImage: "<img src = 'assets/images/storm.jpg'>",		
+		baseAttack: 8,
+		attack: 8,
+		health: 60,
+	},
+
+	yoda = {
+		name: "yoda",
+		image: "<img src = 'assets/images/yoda.jpg' id = 'yoda'>",
+		defendImage: "<img src = 'assets/images/yoda.jpg'>",			
+		baseAttack: 10, 
+		attack: 10,
+		health: 40,
+	}
+];
+
+
+var enemyCount = (characters.length - 1);
+
+
+$("#attacker").append(r2d2.image, c3po.image, storm.image, yoda.image);
+
+function chooseCharacter (char) {
+	character = char;
+	for (var i = 0; i < characters.length; i++) {
+		if (characters[i].name !== character.name) {
+			$("#enemies").append(characters[i].image);
+		}
+		else {
+			$("#attacker").html(characters[i].image);
+		}
+	}	
+}
+
+function chooseOpponent (char) {
+	opponent = char;
+	$("#enemies").empty();
+	console.log(opponent);
+	
+	for (var i = 0; i < characters.length; i++) {
+		if (characters[i].name === opponent.name) {
+			$("#defender").append(characters[i].image);	
+		}
+		if (characters[i].name !== opponent.name && characters[i].name !== character.name) {
+			$("#enemies").append(characters[i].image);
+			console.log(character.name);
+		}
+
+	}
+}	
+
+function attack(){
+		opponent.health = opponent.health - character.attack;
+		character.health = character.health - opponent.attack; 
+		character.attack = character.attack + character.baseAttack;
+
+		
+	if (opponent.health <= 0 && character.health > 0){
+		$("#defender").html("");
+	}
+	if (character.health <=0) {
+
+	}
+	console.log("character: " + character.health);
+	console.log("opponent:" + opponent.health);	
+}	
+
+function win(){
+
+}
+
+function lose(){
+
+}
+
+function reset(){
+
+}
+
+
+$("#attacker").on("click", "img[id = r2d2]", function(){
+	chooseCharacter(r2d2);
+})
+$("#attacker").on("click", "img[id = c3po]", function(){
+	chooseCharacter(c3po);
+})
+$("#attacker").on("click", "img[id = storm]", function(){
+	chooseCharacter(storm);
+})
+$("#attacker").on("click", "img[id = yoda]", function(){
+	chooseCharacter(yoda);
+})
+$("#enemies").on("click", "img[id = r2d2]", function(){
+	chooseOpponent(r2d2);
+})
+$("#enemies").on("click", "img[id = c3po]", function(){
+	chooseOpponent(c3po);
+})
+$("#enemies").on("click", "img[id = storm]", function(){
+	chooseOpponent(storm);
+})
+$("#enemies").on("click", "img[id = yoda]", function(){
+	chooseOpponent(yoda);
+})
+$("#attack").on("click", function(){
+		attack(character, opponent);
+})	
+
+
+
+// 	$(".characters").click(function(){
+// 		var tag = $(this).attr("alt");
+// 		var img = '<img src="assets/images/' + tag + '.jpg"'+ 'class="img-thumbnail">';
+// 		$(".yourCharacter").html('<h1>Your Character:</h1> '+ img);
+// 		$(".enemies").html('<h1>Enemies:</h1>');
+
+// 		for (var i = 0; i < characters.length; i++) {
+// 		if (characters[i] ===this) {
+// 		health = players. + tag + .health;
+// 		console.log(health);	
+// 		}
+
+// 		for (var i = 0; i < characters.length; i++) {
+// 			if (characters[i] !==this) {
+// 				$(".enemies").append(characters[i]).attr("alt", tag);
+// 			}
+// 		}
+// 	})	
+
+// 	$(".enemies").click(function(){
+// 		var tag = $(this).attr("alt");
+// 		var img = '<img src="assets/images/' + tag + '.jpg"'+ 'class="img-thumbnail">';
+// 		$(".defender").html('<h1>Defender:</h1> '+ img);
+
+
+// 		// $(".defender").html('<h1>Defender:</h1> '+ imgD);
+// 		console.log(tag);
+// 	})
+
+
+
+});
+
+
+
+</script>
+
+</body>
+</html>
