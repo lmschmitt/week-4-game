@@ -1,11 +1,19 @@
 .chosenAttacker {
-
+  border: 1px solid #000000;
+/*  background-color: #666666;*/
 }
 
 .chosenEnemies{
+  padding: 10px;
+  border: 1px solid #c90000;
+  background-color: #ff8c8c;
 
 }
 
 .chosenDefender{
-  
+
+}
+
+.margin {
+  margin:10px;
 }

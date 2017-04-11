@@ -13,14 +13,22 @@
 
 </head>
 <body>
-<div class="jumbotron"> 
+<div> 
 	<h2 class="text-center">Star Wars Game</h2>
 </div>
 
-<div class="row yourCharacter" >
-	<h1>Pick a Character:<h1>
-	<div class="col-md-3" id ="attacker"></div>
-	<div class="col-md-3" id ="enemies"></div>
+<div class="row yourCharacter margin" >
+	<div class="col-md-3" id ="attackerHeading"><h1>Pick a Character:</h1></div>
+	<div class="col-md-3" id ="enemiesHeading"></div>
+	<div class="col-md-3" id ="defenderHeading"></div>
+	<div class="col-md-3" id ="defenderHeading"></div>
+
+	
+</div>
+
+<div class="row yourCharacter margin" >
+	<div class="col-md-3 chosenAttacker" id ="attacker"></div>
+	<div class="col-md-3 chosenEnemies" id ="enemies"></div>
 	<div class="col-md-3" id ="defender"></div>
 	<div class="col-md-3" id ="defender"></div>
 
@@ -48,7 +56,7 @@ var opponent;
 var characters = [
 	r2d2 = {
 		name: "r2d2",
-		image: "<img src = 'assets/images/r2d2.jpg' id = 'r2d2'>",
+		image: "<img src = 'assets/images/r2d2.jpg' id = 'r2d2' class='center-block' >",
 		defendImage: "<img src = 'assets/images/r2d2.jpg'>",
 		baseAttack: 5,
 		attack: 5,
@@ -57,7 +65,7 @@ var characters = [
 
 	c3po = {
 		name: "c3po",
-		image: "<img src = 'assets/images/c3po.jpg' id = 'c3po'>",
+		image: "<img src = 'assets/images/c3po.jpg' id = 'c3po' class='center-block'>",
 		defendImage: "<img src = 'assets/images/c3po.jpg'>",			
 		baseAttack: 6,	
 		attack: 6,
@@ -66,7 +74,7 @@ var characters = [
 
 	storm = {
 		name: "storm",
-		image: "<img src = 'assets/images/storm.jpg' id = 'storm'>",
+		image: "<img src = 'assets/images/storm.jpg' id = 'storm' class='center-block'>",
 		defendImage: "<img src = 'assets/images/storm.jpg'>",		
 		baseAttack: 8,
 		attack: 8,
@@ -75,7 +83,7 @@ var characters = [
 
 	yoda = {
 		name: "yoda",
-		image: "<img src = 'assets/images/yoda.jpg' id = 'yoda'>",
+		image: "<img src = 'assets/images/yoda.jpg' id = 'yoda' class='center-block'>",
 		defendImage: "<img src = 'assets/images/yoda.jpg'>",			
 		baseAttack: 10, 
 		attack: 10,
