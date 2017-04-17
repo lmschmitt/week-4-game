@@ -30,7 +30,7 @@
 	<div class="col-md-3 chosenAttacker" id ="attacker"></div>
 	<div class="col-md-3 chosenEnemies" id ="enemies"></div>
 	<div class="col-md-3" id ="defender"></div>
-	<div class="col-md-3" id ="defender"></div>
+	<div class="col-md-3" id ="info"></div>
 
 	
 </div>
@@ -50,40 +50,44 @@
 
 $(function() {
 
+
 var character;
-var opponent;	
-	
+var opponent;
+var enemiesDefeated = [];
+var enemyBeat;
+var currentCharacter;	
+var currentOpponent;
 var characters = [
-	r2d2 = {
+	{
 		name: "r2d2",
-		image: "<img src = 'assets/images/r2d2.jpg' id = 'r2d2' class='center-block' >",
+		image: "<img src = 'assets/images/r2d2.jpg' id = 'r2d2' class='center-block enemies' >",
 		defendImage: "<img src = 'assets/images/r2d2.jpg'>",
 		baseAttack: 5,
 		attack: 5,
 		health: 50,
 	},
 
-	c3po = {
+	{
 		name: "c3po",
-		image: "<img src = 'assets/images/c3po.jpg' id = 'c3po' class='center-block'>",
+		image: "<img src = 'assets/images/c3po.jpg' id = 'c3po' class='center-block enemies'>",
 		defendImage: "<img src = 'assets/images/c3po.jpg'>",			
 		baseAttack: 6,	
 		attack: 6,
 		health: 80,
 	},
 
-	storm = {
+	{
 		name: "storm",
-		image: "<img src = 'assets/images/storm.jpg' id = 'storm' class='center-block'>",
+		image: "<img src = 'assets/images/storm.jpg' id = 'storm' class='center-block enemies'>",
 		defendImage: "<img src = 'assets/images/storm.jpg'>",		
 		baseAttack: 8,
 		attack: 8,
 		health: 60,
 	},
 
-	yoda = {
+	{
 		name: "yoda",
-		image: "<img src = 'assets/images/yoda.jpg' id = 'yoda' class='center-block'>",
+		image: "<img src = 'assets/images/yoda.jpg' id = 'yoda' class='center-block enemies'>",
 		defendImage: "<img src = 'assets/images/yoda.jpg'>",			
 		baseAttack: 10, 
 		attack: 10,
@@ -94,8 +98,9 @@ var characters = [
 
 var enemyCount = (characters.length - 1);
 
-
-$("#attacker").append(r2d2.image, c3po.image, storm.image, yoda.image);
+for (var i = 0; i < characters.length; i++) {
+	$("#attacker").append(characters[i].image);
+}
 
 function chooseCharacter (char) {
 	character = char;
@@ -120,7 +125,6 @@ function chooseOpponent (char) {
 		}
 		if (characters[i].name !== opponent.name && characters[i].name !== character.name) {
 			$("#enemies").append(characters[i].image);
-			console.log(character.name);
 		}
 
 	}
@@ -130,14 +134,29 @@ function attack(){
 		opponent.health = opponent.health - character.attack;
 		character.health = character.health - opponent.attack; 
 		character.attack = character.attack + character.baseAttack;
+		$("#info").html(character.name + " attacks for " + character.attack + "<br>" + character.name + " health: " + character.health);
+		$("#info").append("<br>" + opponent.name + " attacks for " + opponent.attack + "<br>" + opponent.name + " health: " + opponent.health);	
 
 		
 	if (opponent.health <= 0 && character.health > 0){
 		$("#defender").html("");
+		enemiesDefeated.push(opponent);
+		enemyBeat = opponent.name;
+		$("#info").html("You won the battle. Choose your next opponent.");
+			for (var i =0; i < characters.length; i++) {
+   				if (characters[i].name === enemyBeat) {
+      			characters.splice(i,1);
+      			break;
+      		}	
+   }	
+		console.log(enemiesDefeated);
+		console.log(enemyBeat);
+		console.log(characters);
 	}
 	if (character.health <=0) {
 
 	}
+
 	console.log("character: " + character.health);
 	console.log("opponent:" + opponent.health);	
 }	
@@ -154,65 +173,74 @@ function reset(){
 
 }
 
-
+///need to write a loop rather than choose an index, as when characters are deleted, indexes are changing creating errors. 
 $("#attacker").on("click", "img[id = r2d2]", function(){
-	chooseCharacter(r2d2);
+	currentCharacter = "r2d2";
+	for (var i =0; i < characters.length; i++) {
+		if (characters[i].name === currentCharacter) {
+      		chooseCharacter(characters[i]);
+   		}
+   	}	
 })
 $("#attacker").on("click", "img[id = c3po]", function(){
-	chooseCharacter(c3po);
+	currentCharacter = "c3po";
+	for (var i =0; i < characters.length; i++) {
+		if (characters[i].name === currentCharacter) {
+      		chooseCharacter(characters[i]);
+   		}
+   	}
 })
 $("#attacker").on("click", "img[id = storm]", function(){
-	chooseCharacter(storm);
+	currentCharacter = "storm";
+	for (var i =0; i < characters.length; i++) {
+		if (characters[i].name === currentCharacter) {
+      		chooseCharacter(characters[i]);
+   		}
+   	}
 })
 $("#attacker").on("click", "img[id = yoda]", function(){
-	chooseCharacter(yoda);
+	currentCharacter = "yoda";
+	for (var i =0; i < characters.length; i++) {
+		if (characters[i].name === currentCharacter) {
+      		chooseCharacter(characters[i]);
+   		}
+   	}
 })
 $("#enemies").on("click", "img[id = r2d2]", function(){
-	chooseOpponent(r2d2);
+	currentOpponent = "r2d2";
+	for (var i =0; i < characters.length; i++) {
+		if (characters[i].name === currentOpponent) {
+      		chooseOpponent(characters[i]);
+   		}
+   	}
 })
 $("#enemies").on("click", "img[id = c3po]", function(){
-	chooseOpponent(c3po);
+	currentOpponent = "c3po";
+	for (var i =0; i < characters.length; i++) {
+		if (characters[i].name === currentOpponent) {
+      		chooseOpponent(characters[i]);
+   		}
+   	}
 })
 $("#enemies").on("click", "img[id = storm]", function(){
-	chooseOpponent(storm);
+	currentOpponent = "storm";
+	for (var i =0; i < characters.length; i++) {
+		if (characters[i].name === currentOpponent) {
+      		chooseOpponent(characters[i]);
+   		}
+   	}
 })
 $("#enemies").on("click", "img[id = yoda]", function(){
-	chooseOpponent(yoda);
+	currentOpponent = "yoda";
+	for (var i =0; i < characters.length; i++) {
+		if (characters[i].name === currentOpponent) {
+      		chooseOpponent(characters[i]);
+   		}
+   	}
 })
 $("#attack").on("click", function(){
 		attack(character, opponent);
 })	
-
-
-
-// 	$(".characters").click(function(){
-// 		var tag = $(this).attr("alt");
-// 		var img = '<img src="assets/images/' + tag + '.jpg"'+ 'class="img-thumbnail">';
-// 		$(".yourCharacter").html('<h1>Your Character:</h1> '+ img);
-// 		$(".enemies").html('<h1>Enemies:</h1>');
-
-// 		for (var i = 0; i < characters.length; i++) {
-// 		if (characters[i] ===this) {
-// 		health = players. + tag + .health;
-// 		console.log(health);	
-// 		}
-
-// 		for (var i = 0; i < characters.length; i++) {
-// 			if (characters[i] !==this) {
-// 				$(".enemies").append(characters[i]).attr("alt", tag);
-// 			}
-// 		}
-// 	})	
-
-// 	$(".enemies").click(function(){
-// 		var tag = $(this).attr("alt");
-// 		var img = '<img src="assets/images/' + tag + '.jpg"'+ 'class="img-thumbnail">';
-// 		$(".defender").html('<h1>Defender:</h1> '+ img);
-
-
-// 		// $(".defender").html('<h1>Defender:</h1> '+ imgD);
-// 		console.log(tag);
-// 	})
 
 
 
