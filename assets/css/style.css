@@ -1,6 +1,8 @@
 .chosenAttacker {
-  border: 1px solid #000000;
-/*  background-color: #666666;*/
+  padding: 10px;
+  border: 1px solid #333333;
+  background-color: #eeeeee;
+  margin:10px;
 }
 
 .chosenEnemies{
@@ -9,15 +11,50 @@
   background-color: #ff8c8c;
   margin:10px;
 
+
 }
 
 .chosenDefender{
+  padding: 10px;
+  border: 1px solid #000000;
+  background-color: #999999;
+  margin:10px;
 
+}
+#enemiesHeading {
+  padding: 10px;
+  margin:10px;
+}
+
+#attackerHeading{
+  padding: 10px;
+  margin:10px;
+}
+
+#defenderHeading{
+  padding: 10px;
+  margin:10px;
 }
 
 .enemies {
 	padding-bottom: 10px;
 }
+
+#attackButton{
+  padding: 10px;
+  margin:10px;	
+}
+
+#attack {
+  padding: 10px;
+  margin:10px;		
+}
+
+#restart {
+  padding: 10px;
+  margin:10px;		
+}
+
 
 .margin {
   margin:10px;

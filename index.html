@@ -18,19 +18,19 @@
 </div>
 
 <div class="row yourCharacter margin" >
-	<div class="col-md-3" id ="attackerHeading"><h1>Pick a Character:</h1></div>
-	<div class="col-md-3" id ="enemiesHeading"></div>
-	<div class="col-md-3" id ="defenderHeading"></div>
-	<div class="col-md-3" id ="defenderHeading"></div>
+	<div class="col-md-2" id ="attackerHeading"><h4>Pick a Character:</h4></div>
+	<div class="col-md-2" id ="enemiesHeading"><h4>Pick an Opponent:</h4></div>
+	<div class="col-md-2" id ="defenderHeading"><h4>Attack Character:</h4></div>
+	<div class="col-md-2 attack" id ="attackButton"><button id="attack">Attack</button><button id="restart">Restart</button></div>
 
 	
 </div>
 
 <div class="row yourCharacter margin" >
-	<div class="col-md-3 chosenAttacker" id ="attacker"></div>
-	<div class="col-md-3 chosenEnemies" id ="enemies"></div>
-	<div class="col-md-3" id ="defender"></div>
-	<div class="col-md-3" id ="info"></div>
+	<div class="col-md-2 chosenAttacker" id ="attacker"></div>
+	<div class="col-md-2 chosenEnemies" id ="enemies"></div>
+	<div class="col-md-2 chosenDefender" id ="defender"></div>
+	<div class="col-md-2" id ="info"></div>
 
 	
 </div>
@@ -39,7 +39,6 @@
 <div class="col-md-12 enemies">
 </div>
 
-<button class ="col-md-12" id="attack">Attack</button>
 
 <div class="col-md-12 defender">
 </div>	
@@ -117,6 +116,7 @@ function chooseCharacter (char) {
 function chooseOpponent (char) {
 	opponent = char;
 	$("#enemies").empty();
+	$("#info").html("");
 	console.log(opponent);
 	
 	for (var i = 0; i < characters.length; i++) {
@@ -146,7 +146,6 @@ function attack(){
 			for (var i =0; i < characters.length; i++) {
    				if (characters[i].name === enemyBeat) {
       			characters.splice(i,1);
-      			break;
       		}	
    }	
 		console.log(enemiesDefeated);
@@ -154,7 +153,7 @@ function attack(){
 		console.log(characters);
 	}
 	if (character.health <=0) {
-
+	$("#info").html("You lose. Start Over");
 	}
 
 	console.log("character: " + character.health);
@@ -173,7 +172,7 @@ function reset(){
 
 }
 
-///need to write a loop rather than choose an index, as when characters are deleted, indexes are changing creating errors. 
+
 $("#attacker").on("click", "img[id = r2d2]", function(){
 	currentCharacter = "r2d2";
 	for (var i =0; i < characters.length; i++) {
